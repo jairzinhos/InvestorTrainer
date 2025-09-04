@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SesgosCognitivos - Entrena tu mente para invertir mejor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --info-color: #17a2b8;
+            --light-bg: #ecf0f1;
+            --dark-text: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+        }
+
+        .navbar {
+            background-color: var(--primary-color) !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .bias-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .bias-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,.2);
+        }
+
+        .bias-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 50px 0 30px;
+            text-align: center;
+        }
+
+        .test-question {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,.1);
+        }
+
+        .option-btn {
+            width: 100%;
+            margin: 10px 0;
+            padding: 15px;
+            border: 2px solid var(--secondary-color);
+            background: white;
+            color: var(--secondary-color);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .option-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .option-btn.selected {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .progress-bar-custom {
+            height: 30px;
+            background-color: var(--light-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-color), var(--success-color));
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, var(--warning-color), var(--accent-color));
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .simulation-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,.1);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,.1);
+            text-align: center;
+        }
+
+        .bias-explanation {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .exercise-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,.1);
+            border-left: 5px solid var(--info-color);
+        }
+
+        .scenario-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,.1);
+            transition: all 0.3s ease;
+        }
+
+        .scenario-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,.15);
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .difficulty-easy {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .difficulty-medium {
+            background-color: var(--warning-color);
+            color: white;
+        }
+
+        .difficulty-hard {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .training-progress {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .level-indicator {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            margin: 0 5px;
+        }
+
+        .feedback-correct {
+            background-color: var(--success-color);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .feedback-incorrect {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .score-display {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .completion-summary {
+            background: linear-gradient(135deg, var(--success-color), var(--info-color));
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,.2);
+        }
+
+        .completion-summary h3 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .learning-points {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .learning-points h5 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .learning-points ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .learning-points li {
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .learning-points li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .navigation-buttons {
+            margin-top: 30px;
+        }
+
+        .nav-btn {
+            margin: 10px;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,.2);
+        }
+
+        .achievement-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin: 10px;
+            font-weight: bold;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--success-color);
+            position: absolute;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .test-selector {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,.1);
+            text-align: center;
+        }
+
+        .test-option {
+            background: linear-gradient(135deg, var(--secondary-color), var(--info-color));
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .test-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,.2);
+        }
+
+        .test-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+
+        .random-test-btn {
+            background: linear-gradient(135deg, var(--warning-color), var(--accent-color));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 20px 10px;
+            transition: all 0.3s ease;
+        }
+
+        .random-test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,.2);
+            color: white;
+        }
+
+        .test-history {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-brain"></i> SesgosCognitivos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('home')">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('biases')">Sesgos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('test')">Test</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('training')">Entrenamiento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('scenarios')">Escenarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('tips')">Consejos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <h1><i class="fas fa-brain"></i> Entrena tu mente para invertir mejor</h1>
+            <p class="lead">Descubre cómo los sesgos cognitivos afectan tus decisiones de inversión y aprende a controlarlos con ejercicios personalizados.</p>
+            <div class="mt-4">
+                <button class="btn btn-light btn-lg me-3" onclick="showSection('test')">
+                    <i class="fas fa-clipboard-check"></i> Comenzar Test
+                </button>
+                <button class="btn btn-outline-light btn-lg" onclick="showSection('training')">
+                    <i class="fas fa-dumbbell"></i> Entrenamiento
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sesgos Cognitivos Section -->
+    <section id="biases" class="container mt-5 hidden">
+        <h2 class="section-title">Sesgos Cognitivos en Inversión</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <div class="bias-card" onclick="showBiasDetail('anclaje')">
+                    <div class="bias-icon"><i class="fas fa-anchor"></i></div>
+                    <h4>Efecto de Anclaje</h4>
+                    <p>Las decisiones se ven influenciadas por la primera información recibida.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="bias-card" onclick="showBiasDetail('perdidas')">
+                    <div class="bias-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h4>Aversión a las Pérdidas</h4>
+                    <p>Miedo a perder que lleva a evitar riesgos necesarios.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="bias-card" onclick="showBiasDetail('confirmacion')">
+                    <div class="bias-icon"><i class="fas fa-check-circle"></i></div>
+                    <h4>Sesgo de Confirmación</h4>
+                    <p>Buscar información que confirme nuestras creencias existentes.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="bias-card" onclick="showBiasDetail('confianza')">
+                    <div class="bias-icon"><i class="fas fa-crown"></i></div>
+                    <h4>Exceso de Confianza</h4>
+                    <p>Sobreestimación de las propias habilidades y conocimientos.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="bias-card" onclick="showBiasDetail('manada')">
+                    <div class="bias-icon"><i class="fas fa-users"></i></div>
+                    <h4>Mentalidad de Manada</h4>
+                    <p>Decisions influenciadas por lo que hace la mayoría.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="bias-card" onclick="showBiasDetail('dotacion')">
+                    <div class="bias-icon"><i class="fas fa-gift"></i></div>
+                    <h4>Efecto Dotación</h4>
+                    <p>Sobrevalorar lo que poseemos simplemente por ser nuestro.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bias Detail Modal -->
+    <div class="modal fade" id="biasModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="biasModalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="biasModalContent">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test Section -->
+    <section id="test" class="container mt-5 hidden">
+        <h2 class="section-title">Evaluación de Sesgos Cognitivos</h2>
+        
+        <div id="testSelector" class="test-selector">
+            <h3><i class="fas fa-clipboard-list"></i> Elige tu tipo de evaluación</h3>
+            <p class="lead">Selecciona un test específico o déjanos elegir uno aleatoriamente para ti</p>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="test-option" onclick="startTest('basico')">
+                        <h5><i class="fas fa-play-circle"></i> Test Básico</h5>
+                        <p>Evaluación fundamental de sesgos en decisiones de inversión</p>
+                        <span class="test-badge">5 preguntas</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="test-option" onclick="startTest('emocional')">
+                        <h5><i class="fas fa-heart"></i> Test Emocional</h5>
+                        <p>Enfocado en cómo las emociones afectan tus decisiones</p>
+                        <span class="test-badge">6 preguntas</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="test-option" onclick="startTest('escenarios')">
+                        <h5><i class="fas fa-theater-masks"></i> Test de Escenarios</h5>
+                        <p>Situaciones prácticas de inversión del mundo real</p>
+                        <span class="test-badge">7 preguntas</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="test-option" onclick="startTest('avanzado')">
+                        <h5><i class="fas fa-brain"></i> Test Avanzado</h5>
+                        <p>Evaluación profunda de patrones de pensamiento</p>
+                        <span class="test-badge">8 preguntas</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <button class="random-test-btn" onclick="startRandomTest()">
+                    <i class="fas fa-random"></i> Test Aleatorio
+                </button>
+                <button class="random-test-btn" onclick="showTestHistory()">
+                    <i class="fas fa-history"></i> Ver Historial
+                </button>
+            </div>
+        </div>
+
+        <div id="testInProgress" class="hidden">
+            <div class="progress-bar-custom">
+                <div class="progress-fill" id="progressBar" style="width: 0%">0%</div>
+            </div>
+            <div id="testContainer">
+                <!-- Las preguntas se cargarán dinámicamente -->
+            </div>
+        </div>
+
+        <div id="testHistory" class="test-history hidden">
+            <h4><i class="fas fa-history"></i> Historial de Tests</h4>
+            <div id="historyContainer">
+                <!-- Historial se cargará dinámicamente -->
+            </div>
+            <button class="btn btn-secondary mt-3" onclick="showTestSelector()">
+                <i class="fas fa-arrow-left"></i> Volver a Selector
+            </button>
+        </div>
+    </section>
+
+    <!-- Training Section -->
+    <section id="training" class="container mt-5 hidden">
+        <h2 class="section-title">Entrenamiento Personalizado</h2>
+        
+        <div id="trainingIntro" class="result-card">
+            <h3><i class="fas fa-dumbbell"></i> Tu Plan de Entrenamiento</h3>
+            <p class="lead">Completa el test inicial para desbloquear tu plan de entrenamiento personalizado.</p>
+            <button class="btn btn-primary btn-lg" onclick="showSection('test')">
+                <i class="fas fa-play"></i> Realizar Test
+            </button>
+        </div>
+
+        <div id="trainingContent" class="hidden">
+            <div class="training-progress">
+                <h4><i class="fas fa-chart-line"></i> Progreso de Entrenamiento</h4>
+                <div>
+                    <span class="level-indicator">Nivel <span id="currentLevel">1</span></span>
+                    <span class="score-display">Puntos: <span id="trainingScore">0</span></span>
+                </div>
+                <div class="progress-bar-custom mt-3">
+                    <div class="progress-fill" id="trainingProgressBar" style="width: 0%">0%</div>
+                </div>
+            </div>
+
+            <div id="exercisesContainer">
+                <!-- Ejercicios se cargarán dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Scenarios Section -->
+    <section id="scenarios" class="container mt-5 hidden">
+        <h2 class="section-title">Escenarios de Inversión</h2>
+        <p class="text-center lead">Practica con situaciones reales y aprende a identificar tus sesgos en acción.</p>
+        
+        <div class="row mt-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="scenario-card" onclick="startScenario('crash')">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5><i class="fas fa-chart-line"></i> Crash del Mercado</h5>
+                        <span class="difficulty-badge difficulty-hard">Difícil</span>
+                    </div>
+                    <p>El mercado cae 20% en una semana. ¿Cómo reaccionas?</p>
+                    <button class="btn btn-outline-primary btn-sm">Comenzar</button>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="scenario-card" onclick="startScenario('bubble')">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5><i class="fas fa-bubble"></i> Burbuja Tecnológica</h5>
+                        <span class="difficulty-badge difficulty-medium">Medio</span>
+                    </div>
+                    <p>Todos están comprando acciones de tecnología. ¿Te unes?</p>
+                    <button class="btn btn-outline-primary btn-sm">Comenzar</button>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="scenario-card" onclick="startScenario('inheritance')">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5><i class="fas fa-coins"></i> Herencia Inesperada</h5>
+                        <span class="difficulty-badge difficulty-easy">Fácil</span>
+                    </div>
+                    <p>Recibes $50,000 de herencia. ¿Cómo los inviertes?</p>
+                    <button class="btn btn-outline-primary btn-sm">Comenzar</button>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="scenario-card" onclick="startScenario('portfolio')">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5><i class="fas fa-briefcase"></i> Rebalanceo de Cartera</h5>
+                        <span class="difficulty-badge difficulty-medium">Medio</span>
+                    </div>
+                    <p>Tu cartera está desbalanceada. ¿Qué haces?</p>
+                    <button class="btn btn-outline-primary btn-sm">Comenzar</button>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="scenario-card" onclick="startScenario('hotTip')">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5><i class="fas fa-fire"></i> Tip de Inversión</h5>
+                        <span class="difficulty-badge difficulty-easy">Fácil</span>
+                    </div>
+                    <p>Un amigo te da una "tip infalible". ¿Lo sigues?</p>
+                    <button class="btn btn-outline-primary btn-sm">Comenzar</button>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="scenario-card" onclick="startScenario('retirement')">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5><i class="fas fa-piggy-bank"></i> Plan de Retiro</h5>
+                        <span class="difficulty-badge difficulty-hard">Difícil</span>
+                    </div>
+                    <p>Planeas tu retiro a 30 años. ¿Qué estrategia eliges?</p>
+                    <button class="btn btn-outline-primary btn-sm">Comenzar</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="scenarioContainer" class="simulation-container mt-4 hidden">
+            <!-- El escenario se cargará dinámicamente -->
+        </div>
+    </section>
+
+    <!-- Tips Section -->
+    <section id="tips" class="container mt-5 hidden">
+        <h2 class="section-title">Consejos y Estrategias</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="tip-card">
+                    <h4><i class="fas fa-lightbulb"></i> Consejo Diario</h4>
+                    <p>Antes de tomar una decisión de inversión, hazte la pregunta: "¿Estoy siendo influenciado por algún sesgo cognitivo?"</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="tip-card">
+                    <h4><i class="fas fa-chart-line"></i> Estrategia Práctica</h4>
+                    <p>Mantén un diario de inversiones donde anotes tus decisiones y los sesgos que pudieron influir en ellas.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3 class="text-center">Técnicas para Controlar Sesgos</h3>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="bias-explanation">
+                        <h5><i class="fas fa-balance-scale"></i> Análisis Objectivo</h5>
+                        <p>Busca activamente información que contradiga tus creencias y analiza todos los puntos de vista antes de decidir.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="bias-explanation">
+                        <h5><i class="fas fa-clock"></i> Espera 24 Horas</h5>
+                        <p>Antes de tomar decisiones importantes, espera 24 horas para evitar decisiones impulsivas influenciadas por emociones.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="bias-explanation">
+                        <h5><i class="fas fa-users-slash"></i> Evita la Manada</h5>
+                        <p>No sigas ciegamente a la multitud. Investiga y forma tu propia opinión basada en datos y análisis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Datos de sesgos cognitivos
+        const biasesData = {
+            anclaje: {
+                title: "Efecto de Anclaje",
+                explanation: "El efecto de anclaje ocurre cuando las personas se basan demasiado en la primera información que reciben (el 'ancla') al tomar decisiones.",
+                economic: "En finanzas, esto lleva a los inversores a aferrarse al precio de compra de un activo, ignorando la información actual del mercado.",
+                example: "Compras acciones a $100 y aunque bajan a $70, te niegas a vender porque 'valen $100'.",
+                strategy: "Siempre evalúa los activos basándote en su valor actual y perspectivas futuras, no en lo que pagaste por ellos.",
+                keyLearnings: [
+                    "El precio de compra no determina el valor actual",
+                    "Las decisiones deben basarse en información presente, no pasada",
+                    "Es peligroso aferrarse a precios históricos",
+                    "El valor real de un activo cambia con el tiempo"
+                ]
+            },
+            perdidas: {
+                title: "Aversión a las Pérdidas",
+                explanation: "Las personas sienten el dolor de una pérdida más intensamente que el placer de una ganancia equivalente.",
+                economic: "Esto causa que los inversores sean demasiado conservadores, evitando riesgos necesarios para obtener buenos retornos.",
+                example: "Prefieres mantener tu dinero en efectivo con 0% de retorno antes que invertir en un fondo con 80% de probabilidad de ganar.",
+                strategy: "Acepta que el riesgo es parte inherente de la inversión. Diversifica para manejar el riesgo en lugar de evitarlo completamente.",
+                keyLearnings: [
+                    "El miedo a perder puede paralizar tus decisiones",
+                    "No tomar riesgos también es un riesgo (inflación)",
+                    "La diversificación ayuda a manejar el riesgo",
+                    "Las pérdidas son parte natural del proceso de inversión"
+                ]
+            },
+            confirmacion: {
+                title: "Sesgo de Confirmación",
+                explanation: "Tendencia a buscar, interpretar y recordar información que confirma nuestras creencias preexistentes.",
+                economic: "Los inversores ignoran señales de alerta sobre sus inversiones y solo prestan atención a las noticias positivas.",
+                example: "Solo lees análisis favorables sobre la empresa en que invertiste, ignorando los informes negativos.",
+                strategy: "Busca activamente información que contradiga tus opiniones. Considera múltiples perspectivas antes de decidir.",
+                keyLearnings: [
+                    "Debes buscar activamente información contraria",
+                    "La verdad está en todos los puntos de vista",
+                    "Las críticas son más valiosas que los elogios",
+                    "Una decisión informada requiere análisis completo"
+                ]
+            },
+            confianza: {
+                title: "Exceso de Confianza",
+                explanation: "Sobreestimación de las propias habilidades, conocimientos o capacidad de predecir el futuro.",
+                economic: "Lleva a los inversores a tomar riesgos excesivos, comerciar con demasiada frecuencia y subestimar los riesgos.",
+                example: "Crees que puedes 'ganarle al mercado' consistentemente a pesar de evidencia que muestra que pocos lo logran.",
+                strategy: "Sé humilde sobre tus habilidades. Usa análisis riguroso y considera el consejo de expertos.",
+                keyLearnings: [
+                    "La humildad es clave en la inversión",
+                    "Nadie puede predecir el mercado consistentemente",
+                    "El éxito pasado no garantiza resultados futuros",
+                    "La investigación rigurosa es más importante que el instinto"
+                ]
+            },
+            manada: {
+                title: "Mentalidad de Manada",
+                explanation: "Tendencia a seguir las acciones y decisiones del grupo, incluso si son irracionales.",
+                economic: "Crea burbujas especulativas y pánicos de venta cuando todos siguen al grupo sin pensar.",
+                example: "Compras una acción solo porque 'todos lo están haciendo' sin investigar la empresa.",
+                strategy: "Piensa de forma independiente. La popularidad no garantiza el éxito de una inversión.",
+                keyLearnings: [
+                    "La popularidad no equivale a buen valor",
+                    "Las masas pueden estar equivocadas (burbujas)",
+                    "El pensamiento independiente es tu mayor activo",
+                    "Investiga por ti cuenta, no sigas ciegamente"
+                ]
+            },
+            dotacion: {
+                title: "Efecto Dotación",
+                explanation: "Las personas tienden a valorar más los objetos que poseen simplemente por el hecho de poseerlos.",
+                economic: "Los inversores sobrevaloran las acciones que tienen en su cartera y se resisten a venderlas incluso cuando es racional hacerlo.",
+                example: "Te aferras a acciones de bajo rendimiento porque 'son tuyas' aunque haya mejores oportunidades.",
+                strategy: "Evalúa tus inversiones como si no las poseyeras. ¿Las comprarías hoy al precio actual?",
+                keyLearnings: [
+                    "El valor sentimental nubla el juicio financiero",
+                    "Debes evaluar las inversiones objetivamente",
+                    "Pregúntate: ¿La compraría hoy a este precio?",
+                    "El apego emocional puede costarte dinero"
+                ]
+            }
+        };
+
+        // Múltiples tipos de test
+        const testTypes = {
+            basico: {
+                name: "Test Básico",
+                questions: [
+                    {
+                        question: "Cuando una acción que compré baja de precio, mi primera reacción es:",
+                        options: [
+                            { text: "Vender rápidamente para cortar pérdidas", bias: "perdidas" },
+                            { text: "Esperar a que recupere el precio que pagué", bias: "anclaje" },
+                            { text: "Buscar información que justifique mantenerla", bias: "confirmacion" },
+                            { text: "Comprar más porque 'es una oportunidad'", bias: "confianza" }
+                        ]
+                    },
+                    {
+                        question: "Al decidir invertir en una acción, yo:",
+                        options: [
+                            { text: "Investigo a fondo por mi cuenta", bias: "none" },
+                            { text: "Pregunto a amigos y familiares qué compraron", bias: "manada" },
+                            { text: "Confío en mi instinto y experiencia", bias: "confianza" },
+                            { text: "Solo leo noticias positivas sobre la empresa", bias: "confirmacion" }
+                        ]
+                    },
+                    {
+                        question: "Si todos están comprando una acción 'de moda', yo:",
+                        options: [
+                            { text: "Me siento presionado a comprar también", bias: "manada" },
+                            { text: "La evito porque debe ser una burbuja", bias: "none" },
+                            { text: "La analizo objetivamente antes de decidir", bias: "none" },
+                            { text: "Confío en que la tendencia continuará", bias: "confianza" }
+                        ]
+                    },
+                    {
+                        question: "Cuando tengo que vender una acción:",
+                        options: [
+                            { text: "Vendo las ganadoras rápido y mantengo las perdedoras", bias: "perdidas" },
+                            { text: "Espero a recuperar mi inversión inicial", bias: "anclaje" },
+                            { text: "Vendo según mi análisis objetivo", bias: "none" },
+                            { text: "Me cuesta vender porque 'son mías'", bias: "dotacion" }
+                        ]
+                    },
+                    {
+                        question: "Mi enfoque ante el riesgo es:",
+                        options: [
+                            { text: "Evito el riesgo a toda costa", bias: "perdidas" },
+                            { text: "Acepto riesgos calculados basados en análisis", bias: "none" },
+                            { text: "Confío en que todo saldrá bien", bias: "confianza" },
+                            { text: "Solo tomo riesgos si otros lo hacen", bias: "manada" }
+                        ]
+                    }
+                ]
+            },
+            emocional: {
+                name: "Test Emocional",
+                questions: [
+                    {
+                        question: "Cuando el mercado está muy volátil, yo:",
+                        options: [
+                            { text: "Me pongo nervioso/a y vendo todo", bias: "perdidas" },
+                            { text: "Mantengo la calma y sigo mi plan", bias: "none" },
+                            { text: "Compro más porque 'es una oportunidad'", bias: "confianza" },
+                            { text: "Espero a ver qué hacen los demás", bias: "manada" }
+                        ]
+                    },
+                    {
+                        question: "Después de una gran pérdida, mi reacción es:",
+                        options: [
+                            { text: "Nunca más invierto en eso", bias: "anclaje" },
+                            { text: "Analizo qué aprendí del error", bias: "none" },
+                            { text: "Busco culpables externos", bias: "confirmacion" },
+                            { text: "Trato de recuperar lo perdido rápido", bias: "perdidas" }
+                        ]
+                    },
+                    {
+                        question: "Cuando una inversión mía tiene grandes ganancias:",
+                        options: [
+                            { text: "Vendo inmediatamente para asegurar", bias: "perdidas" },
+                            { text: "Me siento invencible y arriesgo más", bias: "confianza" },
+                            { text: "Mantengo y sigo monitoreando", bias: "none" },
+                            { text: "Recomiendo a todos que compren", bias: "manada" }
+                        ]
+                    },
+                    {
+                        question: "Si un amigo tiene éxito con una inversión:",
+                        options: [
+                            { text: "Copio exactamente lo que hizo", bias: "manada" },
+                            { text: "Analizo si funciona para mi caso", bias: "none" },
+                            { text: "Me siento mal por no haberlo hecho", bias: "anclaje" },
+                            { text: "Busco razones por las que no funcionará", bias: "confirmacion" }
+                        ]
+                    },
+                    {
+                        question: "Cuando leo noticias negativas sobre mis inversiones:",
+                        options: [
+                            { text: "Las ignoro, son falsas", bias: "confirmacion" },
+                            { text: "Las analizo objetivamente", bias: "none" },
+                            { text: "Vendo inmediatamente por pánico", bias: "perdidas" },
+                            { text: "Espero a que otros vendan primero", bias: "manada" }
+                        ]
+                    },
+                    {
+                        question: "Mi relación con el dinero es:",
+                        options: [
+                            { text: "Lo ahorro mucho, no me gusta arriesgar", bias: "perdidas" },
+                            { text: "Lo invierto con cuidado y estrategia", bias: "none" },
+                            { text: "Confío en que siempre tendré más", bias: "confianza" },
+                            { text: "Sigo lo que hacen los exitosos", bias: "manada" }
+                        ]
+                    }
+                ]
+            },
+            escenarios: {
+                name: "Test de Escenarios",
+                questions: [
+                    {
+                        question: "Recibes un bono de $5,000. ¿Qué haces?",
+                        options: [
+                            { text: "Lo guardo en efectivo por seguridad", bias: "perdidas" },
+                            { text: "Lo invierto en lo que recomienda mi broker", bias: "manada" },
+                            { text: "Investigo las mejores opciones para mi perfil", bias: "none" },
+                            { text: "Lo invierto en lo que me dio ganancias antes", bias: "anclaje" }
+                        ]
+                    },
+                    {
+                        question: "Una acción que compraste sube 50% en un mes. ¿Qué haces?",
+                        options: [
+                            { text: "Vendo todo para asegurar ganancias", bias: "perdidas" },
+                            { text: "Compro más porque la tendencia es buena", bias: "confianza" },
+                            { text: "Mantengo y reviso los fundamentos", bias: "none" },
+                            { text: "Espero a que todos vendan primero", bias: "manada" }
+                        ]
+                    },
+                    {
+                        question: "El mercado cae 15% en un día. Tu reacción:",
+                        options: [
+                            { text: "Vendo todo para evitar más pérdidas", bias: "perdidas" },
+                            { text: "Compro más porque está barato", bias: "confianza" },
+                            { text: "Reviso mi estrategia a largo plazo", bias: "none" },
+                            { text: "Espero a ver qué hacen los expertos", bias: "manada" }
+                        ]
+                    },
+                    {
+                        question: "Todos en tu trabajo están invirtiendo en cripto. Tú:",
+                        options: [
+                            { text: "Invierto también para no quedar afuera", bias: "manada" },
+                            { text: "Estudio si tiene sentido para mí", bias: "none" },
+                            { text: "La evito porque es muy arriesgado", bias: "perdidas" },
+                            { text: "Confío en mi instinto sobre cuándo entrar", bias: "confianza" }
+                        ]
+                    },
+                    {
+                        question: "Tienes que vender parte de tu cartera. ¿Cuál vendes?",
+                        options: [
+                            { text: "La que tiene menos ganancias", bias: "anclaje" },
+                            { text: "La que peor fundamentales tiene", bias: "none" },
+                            { text: "Ninguna, espero a recuperar", bias: "perdidas" },
+                            { text: "La que menos me gusta emocionalmente", bias: "dotacion" }
+                        ]
+                    },
+                    {
+                        question: "Un analista recomienda vender una acción que tienes. Tú:",
+                        options: [
+                            { text: "Vendo inmediatamente, es un experto", bias: "manada" },
+                            { text: "Busco opiniones que confirmen mantener", bias: "confirmacion" },
+                            { text: "Analizo los argumentos del analista", bias: "none" },
+                            { text: "Ignoro la recomendación", bias: "confianza" }
+                        ]
+                    },
+                    {
+                        question: "Herencias $100,000. Tu estrategia:",
+                        options: [
+                            { text: "Lo pongo en el banco más seguro", bias: "perdidas" },
+                            { text: "Sigo la estrategia de inversores famosos", bias: "manada" },
+                            { text: "Busco asesoría profesional", bias: "none" },
+                            { text: "Invierto como lo hice con éxito antes", bias: "anclaje" }
+                        ]
+                    }
+                ]
+            },
+            avanzado: {
+                name: "Test Avanzado",
+                questions: [
+                    {
+                        question: "Al evaluar una oportunidad de inversión, mi proceso es:",
+                        options: [
+                            { text: "Comparo con oportunidades pasadas", bias: "anclaje" },
+                            { text: "Analizo métricas y fundamentales actuales", bias: "none" },
+                            { text: "Confío en mi intuición de mercado", bias: "confianza" },
+                            { text: "Veo qué está haciendo el mercado", bias: "manada" }
+                        ]
+                    },
+                    {
+                        question: "Cuando enfrento una decisión de inversión compleja:",
+                        options: [
+                            { text: "Busco información que apoye mi idea inicial", bias: "confirmacion" },
+                            { text: "Considero múltiples escenarios y resultados", bias: "none" },
+                            { text: "Recuerdo decisiones exitosas similares", bias: "anclaje" },
+                            { text: "Sigo las recomendaciones de la mayoría", bias: "manada" }
+                        ]
+                    },
+                    {
+                        question: "Mi tolerancia al riesgo se basa en:",
+                        options: [
+                            { text: "Mis experiencias pasadas con pérdidas", bias: "anclaje" },
+                            { text: "Mi capacidad financiera actual y objetivos", bias: "none" },
+                            { text: "Mi confianza en mis habilidades", bias: "confianza" },
+                            { text: "Lo que otros consideran seguro", bias: "manada" }
+                        ]
+                    },
+                    {
+                        question: "Al rebalancear mi cartera:",
+                        options: [
+                            { text: "Mantengo las que 'me han dado suerte'", bias: "dotacion" },
+                            { text: "Sigo criterios objetivos de asignación", bias: "none" },
+                            { text: "Espero a recuperar pérdidas primero", bias: "perdidas" },
+                            { text: "Hago lo que hacen los fondos exitosos", bias: "manada" }
+                        ]
+                    },
+                    {
+                        question: "Cuando estudio un nuevo sector de inversión:",
+                        options: [
+                            { text: "Solo busco información positiva", bias: "confirmacion" },
+                            { text: "Analizo pros y contras exhaustivamente", bias: "none" },
+                            { text: "Confío en mi conocimiento previo", bias: "confianza" },
+                            { text: "Veo dónde están invirtiendo los demás", bias: "manada" }
+                        ]
+                    },
+                    {
+                        question: "Mi enfoque para el análisis técnico es:",
+                        options: [
+                            { text: "Me fijo en niveles históricos clave", bias: "anclaje" },
+                            { text: "Uso múltiples indicadores objetivos", bias: "none" },
+                            { text: "Confío en pocos indicadores que domino", bias: "confianza" },
+                            { text: "Sigo las estrategias populares", bias: "manada" }
+                        ]
+                    },
+                    {
+                        question: "Al tomar decisiones bajo presión:",
+                        options: [
+                            { text: "Evito decisiones para no perder", bias: "perdidas" },
+                            { text: "Mantengo disciplina y estrategia", bias: "none" },
+                            { text: "Confío en mi instinto", bias: "confianza" },
+                            { text: "Hago lo que hace la mayoría", bias: "manada" }
+                        ]
+                    },
+                    {
+                        question: "Mi filosofía de inversión personal:",
+                        options: [
+                            { text: "Nunca arriesgues lo que no puedes perder", bias: "perdidas" },
+                            { text: "Diversifica y mantén disciplina", bias: "none" },
+                            { text: "El éxito viene de la confianza", bias: "confianza" },
+                            { text: "Sigue a los ganadores del mercado", bias: "manada" }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // Ejercicios específicos para cada sesgo
+        const exercisesData = {
+            anclaje: [
+                {
+                    title: "Ejercicio: Rompiendo el Ancla",
+                    description: "Imagina que compraste acciones de XYZ a $50. Ahora valen $30. ¿Qué harías?",
+                    options: [
+                        { text: "Esperar a que vuelvan a $50 para vender", bias: true, feedback: "¡Cuidado! Estás anclado al precio de compra." },
+                        { text: "Analizar la situación actual de la empresa", bias: false, feedback: "¡Excelente! Estás evaluando la situación objetivamente." },
+                        { text: "Comprar más para bajar el promedio", bias: true, feedback: "Peligro: estás reforzando el anclaje." },
+                        { text: "Vender todo inmediatamente", bias: false, feedback: "Aunque drástico, no estás anclado al precio pasado." }
+                    ]
+                },
+                {
+                    title: "Ejercicio: Evaluación Independiente",
+                    description: "Una casa que viste el año pasado costaba $300,000. Ahora similar cuesta $350,000. ¿La compras?",
+                    options: [
+                        { text: "No, porque el año pasado era más barata", bias: true, feedback: "Estás anclado al precio pasado." },
+                        { text: "Analizo el valor actual y las condiciones del mercado", bias: false, feedback: "¡Perfecto! Evaluación objetiva." },
+                        { text: "Espero a que baje a $300,000", bias: true, feedback: "El anclaje te está limitando." },
+                        { text: "La compro solo si el precio parece justo hoy", bias: false, feedback: "Buena decisión, enfocada en el presente." }
+                    ]
+                }
+            ],
+            perdidas: [
+                {
+                    title: "Ejercicio: Aceptando el Riesgo",
+                    description: "Tienes $10,000. Opción A: 100% seguro de mantener $10,000. Opción B: 80% de ganar $4,000, 20% de perder $2,000. ¿Qué eliges?",
+                    options: [
+                        { text: "Opción A: Prefiero no arriesgar", bias: true, feedback: "Aversión a pérdidas detectada." },
+                        { text: "Opción B: Acepto el riesgo calculado", bias: false, feedback: "¡Bien! Estás evaluando matemáticamente." },
+                        { text: "Depende de mi estado de ánimo", bias: true, feedback: "Las emociones están influyendo." },
+                        { text: "Invierto parte en A y parte en B", bias: false, feedback: "Estrategia de diversificación inteligente." }
+                    ]
+                },
+                {
+                    title: "Ejercicio: Corte de Pérdidas",
+                    description: "Una acción cayó 25%. Analistas dicen que podría caer más. ¿Qué haces?",
+                    options: [
+                        { text: "Espero a recuperar mi inversión", bias: true, feedback: "Aversión a pérdidas te paraliza." },
+                        { text: "Vendo para limitar pérdidas", bias: false, feedback: "Decisión racional de gestión de riesgo." },
+                        { text: "Compro más para bajar el promedio", bias: true, feedback: "Peligro: estás aumentando la exposición." },
+                        { text: "Analizo el fundamento antes de decidir", bias: false, feedback: "Análisis objetivo, excelente." }
+                    ]
+                }
+            ],
+            confirmacion: [
+                {
+                    title: "Ejercicio: Buscando Contradicciones",
+                    description: "Crees que la empresa ABC es una buena inversión. Encuentras un informe negativo. ¿Qué haces?",
+                    options: [
+                        { text: "Ignoro el informe, debe estar equivocado", bias: true, feedback: "Sesgo de confirmación claro." },
+                        { text: "Busco más información que apoye mi tesis", bias: true, feedback: "Reforzando el sesgo." },
+                        { text: "Analizo el informe críticamente", bias: false, feedback: "¡Excelente! Mente abierta." },
+                        { text: "Busco opiniones contrarias para tener balance", bias: false, feedback: "Perfecto, buscando perspectiva completa." }
+                    ]
+                },
+                {
+                    title: "Ejercicio: Análisis Múltiple",
+                    description: "Antes de invertir, ¿qué tipo de información buscas?",
+                    options: [
+                        { text: "Solo noticias positivas sobre la empresa", bias: true, feedback: "Sesgo de confirmación activo." },
+                        { text: "Opiniones que coinciden con la mía", bias: true, feedback: "Buscando validación, no verdad." },
+                        { text: "Información balanceada, pros y contras", bias: false, feedback: "¡Ideal! Análisis completo." },
+                        { text: "Críticas y riesgos principalmente", bias: false, feedback: "Buen enfoque, evaluando riesgos." }
+                    ]
+                }
+            ],
+            confianza: [
+                {
+                    title: "Ejercicio: Humildad Inversora",
+                    description: "Tu última inversión tuvo 50% de ganancia. ¿Qué piensas?",
+                    options: [
+                        { text: "Soy un genio de la inversión", bias: true, feedback: "Exceso de confianza peligroso." },
+                        { text: "Tuve suerte, el mercado ayudó", bias: false, feedback: "Perspectiva realista y humilde." },
+                        { text: "Mi estrategia es infalible", bias: true, feedback: "Confianza excesiva detectada." },
+                        { text: "Analizo qué factores contribuyeron al éxito", bias: false, feedback: "Análisis objetivo, excelente." }
+                    ]
+                },
+                {
+                    title: "Ejercicio: Evaluación de Habilidades",
+                    description: "¿Con qué frecuencia crees que puedes superar al mercado?",
+                    options: [
+                        { text: "Siempre, tengo el don", bias: true, feedback: "Confianza peligrosamente alta." },
+                        { text: "La mayoría de las veces", bias: true, feedback: "Sobreestimando habilidades." },
+                        { text: "Algunas veces, con buena investigación", bias: false, feedback: "Expectativas realistas." },
+                        { text: "Es difícil, busco ayuda profesional", bias: false, feedback: "Humildad y sabiduría." }
+                    ]
+                }
+            ],
+            manada: [
+                {
+                    title: "Ejercicio: Pensamiento Independiente",
+                    description: "Todos tus amigos están comprando criptomonedas. ¿Qué haces?",
+                    options: [
+                        { text: "Compro inmediatamente para no quedarme afuera", bias: true, feedback: "Mentalidad de manada pura." },
+                        { text: "Pregunto cuánto ganaron para seguirlos", bias: true, feedback: "Siguiendo al grupo sin análisis." },
+                        { text: "Investigo por mi cuenta antes de decidir", bias: false, feedback: "¡Excelente! Pensamiento independiente." },
+                        { text: "Espero a ver si es una burbuja", bias: false, feedback: "Cautela y análisis, bueno." }
+                    ]
+                },
+                {
+                    title: "Ejercicio: Análisis vs Popularidad",
+                    description: "Una acción es muy popular en redes sociales. ¿La compras?",
+                    options: [
+                        { text: "Sí, si todos la compran debe ser buena", bias: true, feedback: "Siguiendo la manada ciegamente." },
+                        { text: "Compro si veo que muchos ganan dinero", bias: true, feedback: "Decisión basada en FOMO." },
+                        { text: "Analizo los fundamentos de la empresa", bias: false, feedback: "Análisis objetivo, perfecto." },
+                        { text: "Me pregunto por qué es tan popular primero", bias: false, feedback: "Curiosidad saludable y crítica." }
+                    ]
+                }
+            ],
+            dotacion: [
+                {
+                    title: "Ejercicio: Desapego Inversor",
+                    description: "Tienes acciones que compraste hace años con pérdidas. ¿Qué haces?",
+                    options: [
+                        { text: "Las mantengo porque son mías", bias: true, feedback: "Efecto dotación claro." },
+                        { text: "Las vendo aunque duela", bias: false, feedback: "Decisión racional, desapego." },
+                        { text: "Espero a recuperar aunque tarde años", bias: true, feedback: "Apego irracional al activo." },
+                        { text: "Evalúo si las volvería a comprar hoy", bias: false, feedback: "Perspectiva objetiva, excelente." }
+                    ]
+                },
+                {
+                    title: "Ejercicio: Evaluación Neutral",
+                    description: "¿Cómo decides vender una acción de tu cartera?",
+                    options: [
+                        { text: "Me cuesta vender, son como familia", bias: true, feedback: "Apego emocional fuerte." },
+                        { text: "Solo si tengo ganancias importantes", bias: true, feedback: "Efecto dotación en decisiones." },
+                        { text: "Basado en análisis objetivo del futuro", bias: false, feedback: "Decisión racional y desapegada." },
+                        { text: "Cuando encuentro mejores oportunidades", bias: false, feedback: "Enfoque pragmático y objetivo." }
+                    ]
+                }
+            ]
+        };
+
+        // Escenarios de simulación
+        const scenariosData = {
+            crash: {
+                title: "Crash del Mercado",
+                description: "El mercado ha caído 20% en la última semana debido a noticias económicas negativas. Tienes una cartera diversificada que también ha sido afectada.",
+                question: "¿Qué decisión tomas?",
+                options: [
+                    { text: "Vendo todo antes de que siga cayendo", bias: "perdidas", feedback: "Reacción de pánico por aversión a pérdidas." },
+                    { text: "Mantengo todo, el mercado siempre se recupera", bias: "anclaje", feedback: "Anclado a la creencia de recuperación inevitable." },
+                    { text: "Vendo las pérdidas y mantengo las ganadoras", bias: "dotacion", feedback: "Efecto dotación: proteges lo que 'funciona'." },
+                    { text: "Rebalanceo estratégicamente", bias: "none", feedback: "¡Excelente! Decisión racional y estratégica." }
+                ]
+            },
+            bubble: {
+                title: "Burbuja Tecnológica",
+                description: "Las acciones de tecnología han subido 50% en 3 meses. Todos en tu entorno están comprando y hablando de ganancias fáciles.",
+                question: "¿Qué haces con tu dinero?",
+                options: [
+                    { text: "Invierto todo en tecnología ahora mismo", bias: "manada", feedback: "Siguiendo la manada sin análisis." },
+                    { text: "Espero a que suba más para entrar", bias: "confianza", feedback: "Exceso de confianza en predecir el mercado." },
+                    { text: "Invierto una pequeña parte para probar", bias: "perdidas", feedback: "Aversión a pérdidas: entras con cautela." },
+                    { text: "Analizo si los fundamentos justifican el precio", bias: "none", feedback: "¡Perfecto! Análisis fundamental objetivo." }
+                ]
+            },
+            inheritance: {
+                title: "Herencia Inesperada",
+                description: "Acabas de recibir $50,000 de herencia. Es dinero que no esperabas y quieres invertirlo sabiamente.",
+                question: "¿Qué enfoque tomas?",
+                options: [
+                    { text: "Lo invierto todo en lo que recomiendan", bias: "manada", feedback: "Siguiendo recomendaciones sin criterio." },
+                    { text: "Lo guardo en efectivo por seguridad", bias: "perdidas", feedback: "Aversión extrema a pérdidas." },
+                    { text: "Invierto en lo que yo creo que funcionará", bias: "confianza", feedback: "Confianza excesiva en tu criterio." },
+                    { text: "Busco asesoría y diversifico", bias: "none", feedback: "¡Excelente! Enfoque prudente y profesional." }
+                ]
+            },
+            portfolio: {
+                title: "Rebalanceo de Cartera",
+                description: "Tu cartera original era 60% acciones, 40% bonos. Ahora las acciones representan 80% por su buen desempeño.",
+                question: "¿Qué acción tomas?",
+                options: [
+                    { text: "Dejo así, las acciones están funcionando", bias: "confirmacion", feedback: "Buscando confirmación del éxito pasado." },
+                    { text: "Vendo acciones para volver al 60%", bias: "none", feedback: "¡Perfecto! Disciplina de rebalanceo." },
+                    { text: "Vendo más bonos para comprar más acciones", bias: "confianza", feedback: "Exceso de confianza en la tendencia." },
+                    { text: "No vendo nada, espero que siga subiendo", bias: "anclaje", feedback: "Anclado al rendimiento reciente." }
+                ]
+            },
+            hotTip: {
+                title: "Tip de Inversión",
+                description: "Un amigo cercano te dice que tiene información privilegiada sobre una empresa que 'disparará' la próxima semana.",
+                question: "¿Cómo reaccionas?",
+                options: [
+                    { text: "Invierto todo inmediatamente", bias: "confianza", feedback: "Confianza excesiva en información no verificada." },
+                    { text: "Invierto una parte por si acaso", bias: "perdidas", feedback: "Aversión a pérdidas: entras con cautela." },
+                    { text: "Pregunto a más amigos si lo harían", bias: "manada", feedback: "Buscando validación del grupo." },
+                    { text: "Investigo la empresa antes de decidir", bias: "none", feedback: "¡Excelente! Due diligence adecuado." }
+                ]
+            },
+            retirement: {
+                title: "Plan de Retiro",
+                description: "Tienes 35 años y quieres planificar tu retiro a 65. Tienes $20,000 ahorrados para empezar.",
+                question: "¿Qué estrategia eliges?",
+                options: [
+                    { text: "Invierto todo en acciones de alto crecimiento", bias: "confianza", feedback: "Exceso de confianza en el riesgo." },
+                    { text: "Lo guardo en un CD de bajo riesgo", bias: "perdidas", feedback: "Aversión extrema a pérdidas." },
+                    { text: "Sigo las recomendaciones populares", bias: "manada", feedback: "Siguiendo estrategias de moda." },
+                    { text: "Diversifico según mi perfil de riesgo", bias: "none", feedback: "¡Perfecto! Estrategia personalizada y racional." }
+                ]
+            }
+        };
+
+        // Variables globales
+        let currentQuestion = 0;
+        let testAnswers = [];
+        let dominantBias = 'none';
+        let trainingScore = 0;
+        let currentLevel = 1;
+        let currentExercise = 0;
+        let currentScenario = null;
+        let exercisesCompleted = false;
+        let currentTestType = null;
+        let testHistory = JSON.parse(localStorage.getItem('testHistory') || '[]');
+
+        // Mostrar sección
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.remove('hidden');
+                section.classList.add('fade-in');
+            }
+
+            if (sectionId === 'test') {
+                showTestSelector();
+            } else if (sectionId === 'training') {
+                if (dominantBias !== 'none') {
+                    showTrainingContent();
+                }
+            }
+        }
+
+        // Mostrar selector de test
+        function showTestSelector() {
+            document.getElementById('testSelector').classList.remove('hidden');
+            document.getElementById('testInProgress').classList.add('hidden');
+            document.getElementById('testHistory').classList.add('hidden');
+        }
+
+        // Iniciar test específico
+        function startTest(testType) {
+            currentTestType = testType;
+            currentQuestion = 0;
+            testAnswers = [];
+            
+            document.getElementById('testSelector').classList.add('hidden');
+            document.getElementById('testInProgress').classList.remove('hidden');
+            
+            showQuestion();
+        }
+
+        // Iniciar test aleatorio
+        function startRandomTest() {
+            const testTypesArray = Object.keys(testTypes);
+            const randomType = testTypesArray[Math.floor(Math.random() * testTypesArray.length)];
+            startTest(randomType);
+        }
+
+        // Mostrar historial de tests
+        function showTestHistory() {
+            document.getElementById('testSelector').classList.add('hidden');
+            document.getElementById('testHistory').classList.remove('hidden');
+            
+            const container = document.getElementById('historyContainer');
+            
+            if (testHistory.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center">
+                        <i class="fas fa-clipboard-list fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Aún no has completado ningún test</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = testHistory.map((test, index) => `
+                    <div class="history-item">
+                        <div>
+                            <strong>${test.testName}</strong>
+                            <br>
+                            <small class="text-muted">${test.date}</small>
+                        </div>
+                        <div>
+                            <span class="badge bg-primary">${test.dominantBias}</span>
+                            <button class="btn btn-sm btn-outline-secondary ms-2" onclick="startTest('${test.testType}')">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Mostrar pregunta
+        function showQuestion() {
+            const container = document.getElementById('testContainer');
+            const test = testTypes[currentTestType];
+            const question = test.questions[currentQuestion];
+            
+            if (question) {
+                container.innerHTML = `
+                    <div class="test-question">
+                        <h4>Pregunta ${currentQuestion + 1} de ${test.questions.length}</h4>
+                        <p class="lead">${question.question}</p>
+                        <div class="options">
+                            ${question.options.map((option, index) => `
+                                <button class="option-btn" onclick="selectAnswer('${option.bias}', ${index})">
+                                    ${option.text}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                
+                updateProgress();
+            } else {
+                showTestResults();
+            }
+        }
+
+        // Seleccionar respuesta
+        function selectAnswer(bias, buttonIndex) {
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+                if (index === buttonIndex) {
+                    btn.classList.add('selected');
+                } else {
+                    btn.classList.remove('selected');
+                }
+            });
+
+            testAnswers.push(bias);
+
+            setTimeout(() => {
+                currentQuestion++;
+                showQuestion();
+            }, 1000);
+        }
+
+        // Actualizar barra de progreso
+        function updateProgress() {
+            const test = testTypes[currentTestType];
+            const progress = ((currentQuestion + 1) / test.questions.length) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = progress + '%';
+            progressBar.textContent = Math.round(progress) + '%';
+        }
+
+        // Mostrar resultados del test
+        function showTestResults() {
+            const container = document.getElementById('testContainer');
+            const test = testTypes[currentTestType];
+            
+            const biasCount = {};
+            testAnswers.forEach(answer => {
+                if (answer !== 'none') {
+                    biasCount[answer] = (biasCount[answer] || 0) + 1;
+                }
+            });
+
+            dominantBias = Object.keys(biasCount).reduce((a, b) => 
+                biasCount[a] > biasCount[b] ? a : b, 'none'
+            );
+
+            // Guardar en historial
+            const testResult = {
+                testType: currentTestType,
+                testName: test.name,
+                date: new Date().toLocaleDateString('es-ES'),
+                dominantBias: dominantBias !== 'none' ? biasesData[dominantBias].title : 'Sin sesgo dominante'
+            };
+            
+            testHistory.unshift(testResult);
+            if (testHistory.length > 10) {
+                testHistory = testHistory.slice(0, 10);
+            }
+            localStorage.setItem('testHistory', JSON.stringify(testHistory));
+
+            container.innerHTML = `
+                <div class="result-card">
+                    <h3><i class="fas fa-trophy"></i> ¡${test.name} Completado!</h3>
+                    <div class="mt-4">
+                        ${dominantBias !== 'none' ? `
+                            <h4>Tu sesgo dominante: ${biasesData[dominantBias].title}</h4>
+                            <p>${biasesData[dominantBias].explanation}</p>
+                            <div class="mt-3">
+                                <button class="btn btn-primary me-3" onclick="showBiasDetail('${dominantBias}')">
+                                    <i class="fas fa-book"></i> Conocer más sobre este sesgo
+                                </button>
+                                <button class="btn btn-success" onclick="showSection('training')">
+                                    <i class="fas fa-dumbbell"></i> Comenzar Entrenamiento
+                                </button>
+                            </div>
+                        ` : `
+                            <h4><i class="fas fa-check-circle"></i> ¡Felicidades!</h4>
+                            <p>Pareces tener un buen control sobre tus sesgos cognitivos. Sigue así y sigue aprendiendo.</p>
+                            <button class="btn btn-primary mt-3" onclick="showSection('training')">
+                                <i class="fas fa-dumbbell"></i> Explorar Entrenamiento
+                            </button>
+                        `}
+                    </div>
+                    <div class="mt-4">
+                        <button class="btn btn-secondary me-2" onclick="showTestSelector()">
+                            <i class="fas fa-list"></i> Otro Test
+                        </button>
+                        <button class="btn btn-outline-secondary" onclick="startRandomTest()">
+                            <i class="fas fa-random"></i> Test Aleatorio
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Mostrar detalle de sesgo
+        function showBiasDetail(biasKey) {
+            const bias = biasesData[biasKey];
+            if (bias) {
+                document.getElementById('biasModalTitle').textContent = bias.title;
+                document.getElementById('biasModalContent').innerHTML = `
+                    <div class="bias-explanation">
+                        <h5><i class="fas fa-info-circle"></i> ¿Qué es?</h5>
+                        <p>${bias.explanation}</p>
+                    </div>
+                    <div class="bias-explanation">
+                        <h5><i class="fas fa-chart-line"></i> Explicación Económica</h5>
+                        <p>${bias.economic}</p>
+                    </div>
+                    <div class="bias-explanation">
+                        <h5><i class="fas fa-exclamation-triangle"></i> Ejemplo Práctico</h5>
+                        <p>${bias.example}</p>
+                    </div>
+                    <div class="bias-explanation">
+                        <h5><i class="fas fa-lightbulb"></i> Estrategia para Controlarlo</h5>
+                        <p>${bias.strategy}</p>
+                    </div>
+                `;
+                new bootstrap.Modal(document.getElementById('biasModal')).show();
+            }
+        }
+
+        // Mostrar contenido de entrenamiento
+        function showTrainingContent() {
+            document.getElementById('trainingIntro').classList.add('hidden');
+            document.getElementById('trainingContent').classList.remove('hidden');
+            
+            updateTrainingProgress();
+            loadExercises();
+        }
+
+        // Actualizar progreso de entrenamiento
+        function updateTrainingProgress() {
+            document.getElementById('currentLevel').textContent = currentLevel;
+            document.getElementById('trainingScore').textContent = trainingScore;
+            
+            const progress = Math.min((trainingScore / 100) * 100, 100);
+            const progressBar = document.getElementById('trainingProgressBar');
+            progressBar.style.width = progress + '%';
+            progressBar.textContent = Math.round(progress) + '%';
+        }
+
+        // Cargar ejercicios
+        function loadExercises() {
+            const container = document.getElementById('exercisesContainer');
+            const exercises = dominantBias !== 'none' ? exercisesData[dominantBias] : [];
+            
+            if (exercises.length > 0 && !exercisesCompleted) {
+                container.innerHTML = `
+                    <h4 class="text-center mb-4">Ejercicios para ${biasesData[dominantBias].title}</h4>
+                    <div id="exerciseContainer">
+                        ${loadExercise(exercises[currentExercise])}
+                    </div>
+                    <div class="text-center mt-4">
+                        <button class="btn btn-secondary" onclick="previousExercise()" ${currentExercise === 0 ? 'disabled' : ''}>
+                            <i class="fas fa-arrow-left"></i> Anterior
+                        </button>
+                        <button class="btn btn-primary" onclick="nextExercise()">
+                            Siguiente <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                `;
+            } else if (exercisesCompleted) {
+                showTrainingCompletion();
+            } else {
+                container.innerHTML = `
+                    <div class="result-card">
+                        <h4><i class="fas fa-star"></i> ¡Excelente trabajo!</h4>
+                        <p>Has completado todos los ejercicios disponibles. Sigue practicando con los escenarios.</p>
+                        <button class="btn btn-primary" onclick="showSection('scenarios')">
+                            <i class="fas fa-play"></i> Probar Escenarios
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Mostrar resumen de completación de entrenamiento
+        function showTrainingCompletion() {
+            const container = document.getElementById('exercisesContainer');
+            const bias = biasesData[dominantBias];
+            
+            // Crear efecto de confeti
+            createConfetti();
+            
+            container.innerHTML = `
+                <div class="completion-summary">
+                    <h3><i class="fas fa-trophy"></i> ¡Entrenamiento Completado!</h3>
+                    <p class="lead">Has completado con éxito todos los ejercicios para ${bias.title}</p>
+                    
+                    <div class="achievement-badge">
+                        <i class="fas fa-medal"></i> Puntuación: ${trainingScore} puntos
+                    </div>
+                    
+                    <div class="learning-points">
+                        <h5><i class="fas fa-lightbulb"></i> Puntos Clave Aprendidos:</h5>
+                        <ul>
+                            ${bias.keyLearnings.map(learning => `<li>${learning}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="navigation-buttons">
+                        <button class="btn btn-light nav-btn" onclick="showSection('home')">
+                            <i class="fas fa-home"></i> Ir al Inicio
+                        </button>
+                        <button class="btn btn-info nav-btn" onclick="showSection('scenarios')">
+                            <i class="fas fa-play"></i> Practicar Escenarios
+                        </button>
+                        <button class="btn btn-warning nav-btn" onclick="showSection('tips')">
+                            <i class="fas fa-lightbulb"></i> Ver Consejos
+                        </button>
+                        <button class="btn btn-success nav-btn" onclick="resetTraining()">
+                            <i class="fas fa-redo"></i> Repetir Entrenamiento
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Crear efecto de confeti
+        function createConfetti() {
+            const colors = ['#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }, i * 100);
+            }
+        }
+
+        // Resetear entrenamiento
+        function resetTraining() {
+            exercisesCompleted = false;
+            currentExercise = 0;
+            trainingScore = 0;
+            showTrainingContent();
+        }
+
+        // Cargar ejercicio individual
+        function loadExercise(exercise) {
+            return `
+                <div class="exercise-card">
+                    <h5><i class="fas fa-brain"></i> ${exercise.title}</h5>
+                    <p class="lead">${exercise.description}</p>
+                    <div class="options">
+                        ${exercise.options.map((option, index) => `
+                            <button class="option-btn" onclick="answerExercise(${index}, ${option.bias})">
+                                ${option.text}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div id="exerciseFeedback"></div>
+                </div>
+            `;
+        }
+
+        // Responder ejercicio
+        function answerExercise(optionIndex, hasBias) {
+            const exercises = dominantBias !== 'none' ? exercisesData[dominantBias] : [];
+            const exercise = exercises[currentExercise];
+            const option = exercise.options[optionIndex];
+            
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+                if (index === optionIndex) {
+                    btn.classList.add('selected');
+                } else {
+                    btn.classList.remove('selected');
+                }
+            });
+
+            const feedbackDiv = document.getElementById('exerciseFeedback');
+            feedbackDiv.innerHTML = `
+                <div class="${hasBias ? 'feedback-incorrect' : 'feedback-correct'}">
+                    <h6><i class="fas fa-${hasBias ? 'exclamation-triangle' : 'check-circle'}"></i> ${hasBias ? 'Sesgo Detectado' : '¡Buena Decisión!'}</h6>
+                    <p>${option.feedback}</p>
+                </div>
+            `;
+
+            if (!hasBias) {
+                trainingScore += 10;
+                updateTrainingProgress();
+            }
+        }
+
+        // Navegación de ejercicios
+        function nextExercise() {
+            const exercises = dominantBias !== 'none' ? exercisesData[dominantBias] : [];
+            if (currentExercise < exercises.length - 1) {
+                currentExercise++;
+                loadExercises();
+            } else {
+                exercisesCompleted = true;
+                loadExercises();
+            }
+        }
+
+        function previousExercise() {
+            if (currentExercise > 0) {
+                currentExercise--;
+                loadExercises();
+            }
+        }
+
+        // Iniciar escenario
+        function startScenario(scenarioKey) {
+            currentScenario = scenariosData[scenarioKey];
+            const container = document.getElementById('scenarioContainer');
+            
+            container.classList.remove('hidden');
+            container.innerHTML = `
+                <div class="simulation-container">
+                    <h4><i class="fas fa-play-circle"></i> ${currentScenario.title}</h4>
+                    <p class="lead">${currentScenario.description}</p>
+                    <div class="mt-4">
+                        <h5>${currentScenario.question}</h5>
+                        <div class="options">
+                            ${currentScenario.options.map((option, index) => `
+                                <button class="option-btn" onclick="answerScenario(${index}, '${option.bias}')">
+                                    ${option.text}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div id="scenarioFeedback"></div>
+                    <div class="text-center mt-4">
+                        <button class="btn btn-secondary" onclick="resetScenario()">
+                            <i class="fas fa-redo"></i> Reiniciar Escenario
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            container.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Responder escenario
+        function answerScenario(optionIndex, bias) {
+            const option = currentScenario.options[optionIndex];
+            
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+                if (index === optionIndex) {
+                    btn.classList.add('selected');
+                } else {
+                    btn.classList.remove('selected');
+                }
+            });
+
+            const feedbackDiv = document.getElementById('scenarioFeedback');
+            feedbackDiv.innerHTML = `
+                <div class="${bias === 'none' ? 'feedback-correct' : 'feedback-incorrect'} mt-4">
+                    <h6><i class="fas fa-${bias === 'none' ? 'check-circle' : 'exclamation-triangle'}"></i> ${bias === 'none' ? '¡Excelente Decisión!' : 'Sesgo Identificado'}</h6>
+                    <p>${option.feedback}</p>
+                    ${bias !== 'none' ? `
+                        <button class="btn btn-sm btn-outline-light mt-2" onclick="showBiasDetail('${bias}')">
+                            <i class="fas fa-book"></i> Aprender sobre ${biasesData[bias].title}
+                        </button>
+                    ` : ''}
+                </div>
+            `;
+
+            if (bias === 'none') {
+                trainingScore += 15;
+                updateTrainingProgress();
+            }
+        }
+
+        // Reiniciar escenario
+        function resetScenario() {
+            document.getElementById('scenarioFeedback').innerHTML = '';
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+        }
+
+        // Inicializar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+    </script>
+</body>
+</html>
